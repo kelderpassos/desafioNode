@@ -1,0 +1,26 @@
+{
+  "name": "desafio-fabritech",
+  "version": "1.0.0",
+  "description": "desafio full stack em node e vue para a empresa fabritech",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kelder Passos",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "mssql": "^9.0.1",
+    "sequelize": "^6.25.3"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.1.0",
+    "nodemon": "^2.0.20",
+    "sinon": "^14.0.1"
+  }
+}
