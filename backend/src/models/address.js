@@ -51,8 +51,6 @@ Address.init({
   sequelize: database,
   tableName: 'AddressTable',
   timestamps: false,
-
-
 });
 
 

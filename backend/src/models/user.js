@@ -1,5 +1,6 @@
 const sequelize = require('sequelize');
 const database = require('../database/db');
+const Address = require('./address');
 
 class User extends sequelize.Model {}
 
@@ -42,6 +43,8 @@ User.init({
   sequelize: database,
   tableName: 'UserTable'
 });
+
+User.hasMany(Address, { foreignKey: 'id', as: 'address'});
 
 module.exports = User;
 
