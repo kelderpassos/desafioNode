@@ -8,29 +8,20 @@ const checkIfUserAlreadyExists = async (CPF) => {
 };
 
 module.exports = {
-  createUser: async (infos) => {
-    const { name, lastName, age, CPF, email, password } = infos;
+  create: async (infos) => {
+    const { CPF } = infos;
     await checkIfUserAlreadyExists(CPF);
 
-    const newUser = await User.create({
-      name,
-      lastName,
-      age,
-      CPF,
-      email,
-      password,
-    });
-
-    return newUser;
+    return User.create(infos);
   },
 
-  getAllUsers: async () =>
+  readAll: async () =>
     User.findAll({ attributes: { excludes: 'password' } }),
 
-  findOneUser: async (id) =>
+  readOne: async (id) =>
     User.findByPk(id, { include: { attributes: { excludes: 'password' } } }),
 
-  updateUser: async (id, infos) => {
+  update: async (id, infos) => {
     await User.update(infos, { where: id });
     const updatedUser = await User.findByPk(id, {
       include: {
@@ -41,5 +32,6 @@ module.exports = {
     });
     return updatedUser;
   },
-  deleteUser: async (id) => User.destroy({ where: id }),
+
+  delete: async (id) => User.destroy({ where: id }),
 };
