@@ -2,8 +2,9 @@
   "name": "desafio-fabritech",
   "version": "1.0.0",
   "description": "desafio full stack em node e vue para a empresa fabritech",
-  "main": "index.js",
+  "main": "src/api/server.js",
   "scripts": {
+    "dev": "nodemon .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Kelder Passos",
