@@ -2,13 +2,13 @@ const userService = require('../services/UserService');
 
 module.exports = {
   create: async (req, res) => {
-    const { name, lastName, age, CPF, email, password } = req.body;
+    const { name, lastName, age, CPF, email, password, address } = req.body;
 
-    if ( !name || !lastName || !age || !CPF || !email || !password) {
+    if ( !name || !lastName || !age || !CPF || !email || !password, !address) {
       throw new Error('Missing fieds');
     }
     
-    const newUser = await userService.create({ name, lastName, age, CPF, email, password });
+    const newUser = await userService.create({ name, lastName, age, CPF, email, password, address });
 
     return res.status(201).json(newUser);
   },
