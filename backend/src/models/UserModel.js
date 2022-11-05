@@ -1,5 +1,4 @@
-const Address = require('../database/models/address');
-const User = require('../database/models/user');
+const { User } = require('../database/models');
 
 const checkIfUserAlreadyExists = async (CPF) => {
   const existingUser = await User.findOne({ where: { CPF } });
@@ -10,13 +9,12 @@ const checkIfUserAlreadyExists = async (CPF) => {
 module.exports = {
   create: async (infos) => {
     const { CPF } = infos;
-    await checkIfUserAlreadyExists(CPF);
+    // await checkIfUserAlreadyExists(CPF);
 
     return User.create(infos);
   },
 
-  readAll: async () =>
-    User.findAll({ attributes: { excludes: 'password' } }),
+  readAll: async () => User.findAll({ attributes: { excludes: 'password' } }),
 
   readOne: async (id) =>
     User.findByPk(id, { include: { attributes: { excludes: 'password' } } }),
