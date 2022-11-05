@@ -3,17 +3,16 @@ const UserModel = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     lastName: DataTypes.STRING,
     age: DataTypes.INTEGER,
-    CPF: DataTypes.INTEGER,
+    cpf: DataTypes.INTEGER,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    addressId: DataTypes.INTEGER,
   }, {
     underscored: true,
     timestamps: true,
   });
 
   User.associate = (models) => {
-    User.hasMany(models.Address, { foreignKey: 'id', as: 'address'})
+    User.hasMany(models.Address, { foreignKey: 'id', as: 'user'})
   }
 
   return User;

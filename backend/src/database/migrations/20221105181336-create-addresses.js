@@ -9,7 +9,12 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
+      },
+      user_id: {
+        allowNull: false,
         foreignKey: true,
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE'
       },
       address_number: {
         type: Sequelize.INTEGER,

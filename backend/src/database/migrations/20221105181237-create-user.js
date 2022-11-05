@@ -22,7 +22,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      CPF: {
+      cpf: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -33,12 +33,6 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
         allowNull: false,
-      },
-      address_id: {
-        allowNull: false,
-        onDelete: 'CASCADE',
-        foreignKey: true,
-        type: Sequelize.INTEGER
       },
       created_at: {
         type: Sequelize.DATE,
