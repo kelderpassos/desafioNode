@@ -1,4 +1,4 @@
-const { User } = require('../database/models');
+const { User } = require('../database/models/');
 
 const checkIfUserAlreadyExists = async (CPF) => {
   const existingUser = await User.findOne({ where: { CPF } });
@@ -9,7 +9,7 @@ const checkIfUserAlreadyExists = async (CPF) => {
 module.exports = {
   create: async (infos) => {
     const { CPF } = infos;
-    // await checkIfUserAlreadyExists(CPF);
+    await checkIfUserAlreadyExists(CPF);
 
     return User.create(infos);
   },
