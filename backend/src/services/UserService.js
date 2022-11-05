@@ -17,8 +17,13 @@ module.exports = {
     }
   },
 
-  readOne: async (id) =>
-    userModel.readOne(id),
+  readOne: async (id) => {
+    try {
+      return userModel.readOne(id);    
+    } catch (error) {
+      throw new Error('User couldn\'t be found');
+    }
+  },
 
   update: async (id, infos) => {
     try {
