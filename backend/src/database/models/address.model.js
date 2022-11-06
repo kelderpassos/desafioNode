@@ -10,7 +10,11 @@ const AddressModel = (sequelize, DataTypes) => {
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     country: DataTypes.STRING,
-  })
+  }, {
+    timestamps: false,
+    tableName: 'addresses',
+    underscored: true,
+  });
 
   return Address;
 };
