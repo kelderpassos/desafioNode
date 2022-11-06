@@ -1,24 +1,26 @@
 const { User, Address } = require('../database/models/');
 
-const checkIfUserAlreadyExists = async (CPF) => {
-  const existingUser = await User.findOne({ where: { CPF } });
+const checkIfUserAlreadyExists = async (cpf) => {
+  const existingUser = await User.findOne({ where: { cpf } });
 
   if (existingUser) throw new Error('User already exists');
 };
 
 module.exports = {
   create: async (infos) => {
-    const { cpf, address } = infos;
+    const { name, lastName, age, cpf, email, fatherName, motherName, address } = infos;
     await checkIfUserAlreadyExists(cpf);
-    await Address.create(address);
 
-    return User.create(infos);
+    const { id } = await User.create(infos);
+    await Address.create({ ...address, userId: id });
+
+    return { id, name, lastName, age, cpf, email, fatherName, motherName };
   },
 
-  readAll: async () => User.findAll({ attributes: { excludes: 'password' } }),
+  readAll: async () => User.findAll({ attributes: { exclude: 'password' } }),
 
   readOne: async (id) =>
-    User.findByPk(id, { includes: { attributes: { excludes: 'password' } } }),
+    User.findByPk(id, { includes: { attributes: { exclude: 'password' } } }),
 
   update: async (id, infos) => {
     await User.update(infos, { where: id });
@@ -32,5 +34,5 @@ module.exports = {
     return updatedUser;
   },
 
-  delete: async (id) => User.destroy({ where: id }),
+  delete: async (id) => User.destroy({ where: { id } }),
 };

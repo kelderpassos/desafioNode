@@ -6,6 +6,8 @@ const UserModel = (sequelize, DataTypes) => {
     cpf: DataTypes.INTEGER,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
+    fatherName: DataTypes.STRING,
+    motherName: DataTypes.STRING, 
   }, {
     underscored: true,
     timestamps: true,
