@@ -30,4 +30,6 @@ module.exports = {
   },
 
   delete: async (id) => User.destroy({ where: { id } }),
+
+  findByEmail: async(email) => User.findOne({ where: { email }}),
 };
