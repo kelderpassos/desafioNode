@@ -34,6 +34,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      father_name: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      mother_name: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -42,9 +50,6 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: true,
       },
-     }, {
-      timestamps: true,
-      underscored: true,
      });    
   },
 
