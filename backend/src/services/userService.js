@@ -1,9 +1,14 @@
 const userModel = require('../models/userModel');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
   create: async (infos) => {
+    const { password } = infos;
+
+    const hash = bcrypt.hashSync(password, 8);
+
     try {
-      return userModel.create(infos);
+      return userModel.create({ ...infos, password: hash });
     } catch (error) {
       throw new Error('User cannot be created');
     }
