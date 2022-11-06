@@ -17,10 +17,10 @@ module.exports = {
     return newUser;
   },
 
-  readAll: async () => User.findAll({ attributes: { excludes: 'password' } }),
+  readAll: async () => User.findAll({ attributes: { exclude: 'password' } }),
 
   readOne: async (id) =>
-    User.findByPk(id, { includes: { attributes: { excludes: 'password' } } }),
+    User.findByPk(id, { includes: { attributes: { exclude: 'password' } } }),
 
   update: async (id, infos) => {
     await User.update(infos, { where: id });
