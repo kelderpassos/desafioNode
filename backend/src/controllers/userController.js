@@ -1,4 +1,5 @@
 const userService = require('../services/userService');
+const auth = require('../utils/auth');
 
 module.exports = {
   create: async (req, res) => {
@@ -33,7 +34,11 @@ module.exports = {
     return res.status(201).json(newUser);
   },
 
-  readAll: async (_req, res) => {
+  readAll: async (req, res) => {
+    const { authorization } = req.headers;
+
+    auth.validateToken(authorization);
+
     const allUsers = await userService.readAll();
 
     return res.status(200).json(allUsers);
