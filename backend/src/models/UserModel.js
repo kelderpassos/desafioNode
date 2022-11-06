@@ -8,13 +8,13 @@ const checkIfUserAlreadyExists = async (cpf) => {
 
 module.exports = {
   create: async (infos) => {
-    const { cpf, address } = infos;
+    const { name, lastName, age, cpf, email, fatherName, motherName, address } = infos;
     await checkIfUserAlreadyExists(cpf);
 
-    const newUser = await User.create(infos);
-    await Address.create({ ...address, userId: newUser.id });
+    const { id } = await User.create(infos);
+    await Address.create({ ...address, userId: id });
 
-    return newUser;
+    return { id, name, lastName, age, cpf, email, fatherName, motherName };
   },
 
   readAll: async () => User.findAll({ attributes: { exclude: 'password' } }),
