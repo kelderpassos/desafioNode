@@ -1,9 +1,9 @@
-const userModel = require('../models/UserModel');
+const userModel = require('../models/userModel');
 
 module.exports = {
   create: async (infos) => {
     try {
-      return userModel.create(infos);    
+      return userModel.create(infos);
     } catch (error) {
       throw new Error('User cannot be created');
     }
@@ -11,33 +11,33 @@ module.exports = {
 
   readAll: async () => {
     try {
-      return userModel.readAll();   
+      return userModel.readAll();
     } catch (error) {
-      throw new Error('List of users couldn\'t be retrieved');
+      throw new Error("List of users couldn't be retrieved");
     }
   },
 
   readOne: async (id) => {
     try {
-      return userModel.readOne(id);    
+      return userModel.readOne(id);
     } catch (error) {
-      throw new Error('User couldn\'t be found');
+      throw new Error("User couldn't be found");
     }
   },
 
   update: async (id, infos) => {
     try {
-      return userModel.update(id, infos);      
+      return userModel.update(id, infos);
     } catch (error) {
-      throw new Error('User couldn\'t be updated');
+      throw new Error("User couldn't be updated");
     }
   },
-  
+
   delete: async (id) => {
     try {
       return userModel.delete(id);
     } catch (error) {
-      throw new Error('User couldn\'t be deleted');
+      throw new Error("User couldn't be deleted");
     }
-  }
+  },
 };
