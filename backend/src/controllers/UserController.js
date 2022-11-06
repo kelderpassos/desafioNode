@@ -46,7 +46,7 @@ module.exports = {
     if (!id) throw new Error('Missing params');
 
     await userService.delete(id);
-
-    return res.status(204).json({ message: 'User deleted' });
+    
+    return res.status(200).json({ message: 'User deleted' });
   },
 };
