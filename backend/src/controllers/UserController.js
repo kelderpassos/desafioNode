@@ -2,7 +2,7 @@ const userService = require('../services/UserService');
 
 module.exports = {
   create: async (req, res) => {
-    const { name, lastName, age, cpf, email, password,  fatherName, motherName, address } = req.body;
+    const { name, lastName, age, cpf, email, password, fatherName, motherName, address } = req.body;
 
     if ( !name || !lastName || !age || !cpf || !email || !password || !address) {
       throw new Error('Missing fieds');
@@ -31,15 +31,11 @@ module.exports = {
 
   update: async (req, res) => {
     const { id } = req.params;
-    const { name, lastName, age, cpf, email, password } = req.body;
-
-    if ( !name || !lastName || !age || !cpf || !email || !password) {
-      throw new Error('Missing fieds');
-    }
+    const { name, lastName, age, cpf, email, password, fatherName, motherName } = req.body;
 
     if (!id) throw new Error('Missing params');
 
-    const updatedUser = await userService(id, { name, lastName, age, cpf, email, password });
+    const updatedUser = await userService.update(id, { name, lastName, age, cpf, email, password, fatherName, motherName });
 
     return res.status(200).json(updatedUser);
   },
