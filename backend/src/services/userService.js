@@ -1,5 +1,6 @@
 const userModel = require('../models/userModel');
 const bcrypt = require('bcryptjs');
+const ErrorHandler = require('../utils/ErrorHandler');
 
 module.exports = {
   create: async (infos) => {
@@ -10,7 +11,7 @@ module.exports = {
     try {
       return userModel.create({ ...infos, password: hash });
     } catch (error) {
-      throw new Error('User cannot be created');
+      throw new ErrorHandler(400, 'User cannot be created');
     }
   },
 
@@ -18,7 +19,7 @@ module.exports = {
     try {
       return userModel.readAll();
     } catch (error) {
-      throw new Error("List of users couldn't be retrieved");
+      throw new ErrorHandler(404, "List of users couldn't be retrieved");
     }
   },
 
@@ -26,7 +27,7 @@ module.exports = {
     try {
       return userModel.readOne(id);
     } catch (error) {
-      throw new Error("User couldn't be found");
+      throw new ErrorHandler(404, "User couldn't be found");
     }
   },
 
@@ -34,7 +35,7 @@ module.exports = {
     try {
       return userModel.update(id, infos);
     } catch (error) {
-      throw new Error("User couldn't be updated");
+      throw new ErrorHandler(400, "User couldn't be updated");
     }
   },
 
@@ -42,7 +43,7 @@ module.exports = {
     try {
       return userModel.delete(id);
     } catch (error) {
-      throw new Error("User couldn't be deleted");
+      throw new ErrorHandler(400, "User couldn't be deleted");
     }
   },
 };
