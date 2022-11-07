@@ -1,5 +1,6 @@
 const userService = require('../services/userService');
 const auth = require('../utils/auth');
+const ErrorHandler = require('../utils/ErrorHandler');
 
 module.exports = {
   create: async (req, res) => {
@@ -16,7 +17,7 @@ module.exports = {
     } = req.body;
 
     if (!name || !lastName || !age || !cpf || !email || !password || !address) {
-      throw new Error('Missing fieds');
+      throw new ErrorHandler(404, 'Missing fieds');
     }
 
     const newUser = await userService.create({
@@ -47,7 +48,7 @@ module.exports = {
   readOne: async (req, res) => {
     const { id } = req.params;
 
-    if (!id) throw new Error('Missing params');
+    if (!id) throw new ErrorHandler(404, 'Missing params');
 
     const specificUser = await userService.readOne(id);
 
@@ -67,7 +68,7 @@ module.exports = {
       motherName,
     } = req.body;
 
-    if (!id) throw new Error('Missing params');
+    if (!id) throw new ErrorHandler(404, 'Missing params');
 
     const updatedUser = await userService.update(id, {
       name,
@@ -86,7 +87,7 @@ module.exports = {
   delete: async (req, res) => {
     const { id } = req.params;
 
-    if (!id) throw new Error('Missing params');
+    if (!id) throw new ErrorHandler(404, 'Missing params');
 
     await userService.delete(id);
 

@@ -1,9 +1,10 @@
 const { User, Address } = require('../database/models');
+const ErrorHandler = require('../utils/ErrorHandler');
 
 const checkIfUserAlreadyExists = async (cpf) => {
   const existingUser = await User.findOne({ where: { cpf } });
 
-  if (existingUser) throw new Error('User already exists');
+  if (existingUser) throw new ErrorHandler(400, 'User already exists');
 };
 
 module.exports = {
