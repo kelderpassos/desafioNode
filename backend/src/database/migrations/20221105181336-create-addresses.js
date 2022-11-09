@@ -17,7 +17,7 @@ module.exports = {
         onDelete: 'CASCADE'
       },
       address_number: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       address_name: {
@@ -37,7 +37,7 @@ module.exports = {
         allowNull: false,
       },
       zip_code: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       city: {

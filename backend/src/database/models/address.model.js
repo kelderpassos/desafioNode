@@ -1,12 +1,12 @@
 const AddressModel = (sequelize, DataTypes) => {
   const Address = sequelize.define('Address', {
     userId: DataTypes.INTEGER,
-    addressNumber: DataTypes.INTEGER,
+    addressNumber: DataTypes.STRING,
     addressName: DataTypes.STRING,
-    addressType: DataTypes.INTEGER,
+    addressType: DataTypes.STRING,
     complement: DataTypes.STRING,
     neighborhood: DataTypes.STRING,
-    zipCode: DataTypes.INTEGER,
+    zipCode: DataTypes.STRING,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     country: DataTypes.STRING,

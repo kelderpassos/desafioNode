@@ -3,7 +3,7 @@ const UserModel = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     lastName: DataTypes.STRING,
     age: DataTypes.INTEGER,
-    cpf: DataTypes.INTEGER,
+    cpf: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     fatherName: DataTypes.STRING,
