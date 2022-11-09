@@ -38,7 +38,7 @@ export default {
           localStorage.setItem('token', token);
 
           this.$router.push('/users');          
-        });
+        }).catch(error => console.log(error));
     },
     navigateToRegister() {
       this.$router.push('/signup');
