@@ -16,8 +16,25 @@ module.exports = {
       address,
     } = req.body;
 
-    if (!name || !lastName || !age || !cpf || !email || !password || !address) {
-      throw new ErrorHandler(404, 'Missing fieds');
+    const validFields = [
+      'name',
+      'lastName',
+      'age',
+      'cpf',
+      'email',
+      'password',
+      'fatherName',
+      'motherName',
+      'address',
+    ]
+
+    const missingFields = validFields.reduce((acc, key) => {
+      if (!req.body[key]) acc.push(key);
+      return acc;
+    }, []);
+
+    if (missingFields.length > 0) {
+      throw new ErrorHandler(400, `Missing fields: ${missingFields.join(', ')}`);
     }
 
     const newUser = await userService.create({
