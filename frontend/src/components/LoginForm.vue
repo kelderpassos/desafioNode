@@ -13,7 +13,7 @@
       </div>
     </form>
     <button @click.prevent="submitForm">Acessar</button>
-    <button type="button">Registrar</button>
+    <button @click.prevent="navigateToRegister" type="button">Registrar</button>
     </div>
 </template>
 
@@ -32,7 +32,6 @@ export default {
   },
   methods: {
     submitForm() {
-      console.log(`${this.baseUrl}/login`);
       axios.post(`http://localhost:3001/login`, { email: this.email, password: this.password })
         .then((res) => {
           const token = JSON.stringify(res.data);
@@ -40,8 +39,9 @@ export default {
 
           this.$router.push('/users');          
         });
-
-      // fetch('http://localhost:3001/users')
+    },
+    navigateToRegister() {
+      this.$router.push('/signup');
     }
   }
 }
