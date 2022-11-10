@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h3>Acesse a plataforma</h3>
-    <form>
+  <div class="login-container">
+    <form class="login-form">
+      <h3>Acesse a plataforma</h3>
       <div>
         <label for="email">E-mail</label>
           <input type="email" name="email" required v-model="email">
@@ -11,12 +11,12 @@
         <label for="password">Password</label>
           <input type="password" name="password" required v-model="password">        
       </div>
+      <button @click.prevent="submitForm">Acessar</button>
+      <router-link :to="{ name: 'SignupForm' }">
+          <button>Registrar</button>
+      </router-link>
     </form>
-    <button @click.prevent="submitForm">Acessar</button>
-    <router-link :to="{ name: 'SignupForm' }">
-        <button>Registrar</button>
-    </router-link>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -47,3 +47,63 @@ export default {
   }
 }
 </script>
+
+<style>
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .login-form h3 {
+    color:blue;
+    margin-bottom: 2rem;
+    margin-top: -2rem;
+  }
+
+  .login-form {
+    margin-top: 3rem;
+    padding: 5.8rem;
+    width: 35rem;
+
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .login-form input {
+    outline: none;
+
+    height: 2rem;
+    width: 24rem;
+    padding-left: 10px;
+
+    border-radius: 2px;
+  }
+
+  .login-form button {
+    border: none;
+    border-radius: 2px;
+
+    height: 2rem;
+    width: 24rem;
+    padding-left: 10px;
+    margin-top: 1rem;
+
+    background-color: rgb(111, 172, 192);
+    color: white;
+    font-weight: bold;
+  }
+
+  .login-form button:hover {
+  cursor: pointer;
+  background-color: rgb(78, 126, 142);
+  transition: background-color 0.1s;
+  }
+
+</style>
