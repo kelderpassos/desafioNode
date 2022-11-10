@@ -24,13 +24,30 @@ module.exports = {
   readOne: async (id) =>
     User.findByPk(id, { attributes: { exclude: 'password' } }),
 
-  update: async (id, infos) => {
-    await User.update(infos, { where: { id } });
+  update: async (params, infos) => {
+    const {
+      name,
+      lastName,
+      age,
+      cpf,
+      email,
+      password,
+      fatherName,
+      motherName,
+      address,
+    } = infos;
 
-    return User.findByPk(id, { attributes: { exclude: 'password' } });
+    const { id } = await User.update(
+      { name, lastName, age, cpf, email, password, fatherName, motherName },
+      { where: { id: params } }
+    );
+
+    await Address.update({...address, userId: id}, { where: { id: params }});
+
+    return User.findByPk(params, { attributes: { exclude: 'password' } });
   },
 
   delete: async (id) => User.destroy({ where: { id } }),
 
-  findByEmail: async(email) => User.findOne({ where: { email }}),
+  findByEmail: async (email) => User.findOne({ where: { email } }),
 };

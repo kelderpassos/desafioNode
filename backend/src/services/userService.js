@@ -32,8 +32,12 @@ module.exports = {
   },
 
   update: async (id, infos) => {
+    const { password } = infos;
+
+    const hash = bcrypt.hashSync(password, 8);
+    
     try {
-      return userModel.update(id, infos);
+      return userModel.update(id, {...infos, password: hash});
     } catch (error) {
       throw new ErrorHandler(400, "User couldn't be updated");
     }

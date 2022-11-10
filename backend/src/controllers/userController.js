@@ -83,6 +83,7 @@ module.exports = {
       password,
       fatherName,
       motherName,
+      address
     } = req.body;
 
     if (!id) throw new ErrorHandler(404, 'Missing params');
@@ -96,6 +97,7 @@ module.exports = {
       password,
       fatherName,
       motherName,
+      address
     });
 
     return res.status(200).json(updatedUser);
