@@ -2,8 +2,13 @@
   <main>
     <h2>Todos os usuários</h2>
     <div v-for="user in users" :key="user.id">
-      <p>{{ user.name }}</p>
-      <p>{{ user.email }}</p>
+      <div>
+        <p>{{ user.name }}</p>
+        <p>{{ user.email }}</p>
+        <router-link :to="{ name: 'UserDetails', params: { id: user.id }}">
+          <button>Detalhes do usuário</button>
+        </router-link>
+      </div>
     </div>
   </main>
 </template>
