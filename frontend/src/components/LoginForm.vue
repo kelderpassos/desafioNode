@@ -13,7 +13,9 @@
       </div>
     </form>
     <button @click.prevent="submitForm">Acessar</button>
-    <button @click.prevent="navigateToRegister" type="button">Registrar</button>
+    <router-link :to="{ name: 'SignupForm' }">
+        <button>Registrar</button>
+    </router-link>
     </div>
 </template>
 
@@ -26,7 +28,6 @@ export default {
     return {
       email:'',
       password:'',
-      baseUrl: 'http://localhost:3001/',
       token: ''
     }
   },
