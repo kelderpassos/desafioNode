@@ -58,8 +58,7 @@ export default {
   }
 
   .login-form h3 {
-    color:blue;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     margin-top: -2rem;
   }
 
@@ -74,6 +73,14 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  
+  .login-form div {
+    margin-top: 1rem;
+  }
+
+  .login-form label {
+    font-weight: bold;
   }
   
   .login-form input {
@@ -95,8 +102,6 @@ export default {
     padding-left: 10px;
     margin-top: 1rem;
 
-    background-color: rgb(111, 172, 192);
-    color: white;
     font-weight: bold;
   }
 

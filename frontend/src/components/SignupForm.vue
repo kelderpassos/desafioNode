@@ -1,8 +1,7 @@
 <template>
-    <div>
-      <h1 v-if="userCreated">{{userCreated}}</h1>
-      <form @submit.prevent="submitForm">
-        <div>
+      <form @submit.prevent="submitForm" class="signup-form">
+        <h3 v-if="userCreated">{{userCreated}}</h3>
+        <div class="signup-info">
             <label for="">Nome:</label>
             <input type="text" required name="nome" v-model="personalInfo.name" placeholder="Primeiro Nome">
             
@@ -27,10 +26,7 @@
             
             <label for="">Nome do pai</label>
             <input type="text" name="nomePai" v-model="personalInfo.fatherName" placeholder="Nome do pai">
-        </div>
-        
-        
-        <div>
+          <hr>
           <label for="">CEP</label>
           <input type="number" maxlength="8" required name="CEP" v-model="personalInfo.address.zipCode" @keyup="getCep" placeholder="somente números">
        
@@ -59,13 +55,13 @@
           <input type="text" required name="estado" v-model="personalInfo.address.state" placeholder="Estado">
     
         </div>
-        <button>Enviar</button>
+        <div class="signup-buttons">
+          <button>Enviar</button>
+          <router-link :to="{ name: 'LoginForm' }">
+            <button>Voltar</button>
+          </router-link>
+        </div>
       </form>
-      <router-link :to="{ name: 'LoginForm' }">
-        <button>Voltar</button>
-      </router-link>
-
-    </div>
 </template>
 
 <script>
@@ -147,33 +143,64 @@
 </script>
 
 <style>
-  body {
-    margin: 0;
-    display: flex;
-    place-items: center;
-    min-width: 320px;
-    min-height: 100vh;
-  }
-
-  form {
-    background-color: white;
-    text-align: left;
+  .signup-container {
     display: flex;
     flex-direction: column;
-    width: 70rem;
-    height: 30rem;
-    border: solid red 1px;
+    justify-content: center;
+    align-items: center;
+  }
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100vh;
   }
 
-  label {
-    color: black;
-    font-weight: bold;
-    letter-spacing: 1px;
+  .signup-form h3 {
+    color: red;
+    
   }
 
-  input {
-    border: none;
+  .signup-form hr {
+    border: rgb(124, 126, 131) solid 1px;
+    margin-top: 2rem;
     margin-bottom: 1rem;
+    width: 50vh;
+  }
+
+  .signup-form input {
+    padding-left: 5px;
+  }
+
+  .signup-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .signup-info label {
+    font-weight: bold;
+    margin-bottom: 0.45rem;
+    margin-top: 0.45rem;
+  }
+
+  .signup-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 25rem;
+  }
+
+  .signup-buttons button {
+    border: none;
+    border-radius: 2px;
+
+    height: 2rem;
+    width: 10rem;
+    padding-left: 10px;
+    margin-top: 1rem;
+
+    font-weight: bold;
   }
 
 </style>
