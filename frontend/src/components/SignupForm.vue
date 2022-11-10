@@ -59,8 +59,11 @@
           <input type="text" required name="estado" v-model="personalInfo.address.state" placeholder="Estado">
     
         </div>
-        <button>Send</button>
+        <button>Enviar</button>
       </form>
+      <router-link :to="{ name: 'LoginForm' }">
+        <button>Voltar</button>
+      </router-link>
 
     </div>
 </template>
@@ -117,28 +120,28 @@
             if (status === 201) this.userCreated = 'Usuário criado';
           });
         
-        this.personalInfo = {
-          name: '',
-          lastName: '',
-          age: '',
-          cpf: '',
-          email: '',
-          password: '',
-          motherName: '',
-          fatherName: '',
-          address: {
-            zipCode: '',
-            addressName: '',
-            addressNumber: '',
-            addressType: '',     
-            neighborhood: '',
-            complement: '',
-            city: '',
-            state: '',
-            country: 'Brazil'
-          },
-        }
-      }
+          this.personalInfo = {
+            name: '',
+            lastName: '',
+            age: '',
+            cpf: '',
+            email: '',
+            password: '',
+            motherName: '',
+            fatherName: '',
+            address: {
+              zipCode: '',
+              addressName: '',
+              addressNumber: '',
+              addressType: '',     
+              neighborhood: '',
+              complement: '',
+              city: '',
+              state: '',
+              country: 'Brazil'
+            },
+          };          
+        },
     }
   }
 </script>
