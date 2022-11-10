@@ -1,6 +1,6 @@
 <template>
       <form @submit.prevent="submitForm" class="signup-form">
-        <h3 v-if="userCreated">{{userCreated}}</h3>
+        <h3 v-if="newStatus">{{newStatus}}</h3>
         <div class="signup-info">
             <label for="">Nome:</label>
             <input type="text" required name="nome" v-model="personalInfo.name" placeholder="Primeiro Nome">
@@ -22,10 +22,10 @@
             <p v-if="shortPassword">{{shortPassword}}</p>
             
             <label for="">Nome da mãe</label>
-            <input type="text" name="nomeNae" v-model="personalInfo.motherName" placeholder="Nome da mãe">
+            <input type="text" required name="nomeNae" v-model="personalInfo.motherName" placeholder="Nome da mãe">
             
             <label for="">Nome do pai</label>
-            <input type="text" name="nomePai" v-model="personalInfo.fatherName" placeholder="Nome do pai">
+            <input type="text" required name="nomePai" v-model="personalInfo.fatherName" placeholder="Nome do pai">
           <hr>
           <label for="">CEP</label>
           <input type="number" maxlength="8" required name="CEP" v-model="personalInfo.address.zipCode" @keyup="getCep" placeholder="somente números">
@@ -68,6 +68,12 @@
   import axios from 'axios';
 
   export default {
+    props: {
+      updateDetails: Boolean,
+      params: String,
+      number: Number
+    },
+
     data() {
       return {        
         personalInfo: {
@@ -93,14 +99,14 @@
         },
         shortPassword: '',
         userCreated: '',
-
+        userUpdated: '',
+        newStatus: '',
         baseUrl: 'https://viacep.com.br/ws/'
       }
     },
     methods: {
       async getCep() {
         const baseUrl = `${this.baseUrl}${this.personalInfo.address.zipCode}/json/`;
-        console.log(baseUrl);
         const response = await fetch(baseUrl);
         const { logradouro, bairro, localidade, uf } = await response.json();
         this.personalInfo.address.addressName = logradouro;     
@@ -108,12 +114,34 @@
         this.personalInfo.address.city = localidade;
         this.personalInfo.address.state = uf;
       },
+
+      rerender() {
+        this.newStatus = 'Informações atualizadas';
+        console.log(this.newStatus);      
+      },
+
+      async updateUser() {
+        axios.put(`http://localhost:3001/users/${this.params}`, this.personalInfo)
+        .then((res) => res.data)
+        .then((data) => this.user = data).then((data) => {
+          if (data) {
+            this.rerender()
+          }
+        })
+        .catch(error => console.log(error.message))
+      },
+      
       async submitForm() {
         this.shortPassword = this.personalInfo.password.length > 7 ? '' : 'A senha deve conter mais que 7 characteres'
         
+        if(this.updateDetails === true) {
+          this.updateUser();          
+          return
+        }
+        
         await axios.post(`http://localhost:3001/signup`, this.personalInfo)
           .then(({ status }) => {
-            if (status === 201) this.userCreated = 'Usuário criado';
+            if (status === 201) this.newStatus = 'Usuário criado';
           });
         
           this.personalInfo = {
@@ -154,12 +182,13 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    height: 100vh;
+
   }
 
   .signup-form h3 {
-    color: red;
-    
+    color: blue;
+    margin-bottom: 1rem;   
+    margin-top: 2rem;  
   }
 
   .signup-form hr {
@@ -197,10 +226,13 @@
 
     height: 2rem;
     width: 10rem;
-    padding-left: 10px;
     margin-top: 1rem;
 
     font-weight: bold;
   }
 
+  .signup-buttons button:hover {
+  cursor: pointer;
+  transition: background-color 0.1s;
+  }
 </style>

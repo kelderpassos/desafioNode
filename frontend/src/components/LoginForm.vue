@@ -4,12 +4,12 @@
       <h3>Acesse a plataforma</h3>
       <div>
         <label for="email">E-mail</label>
-          <input type="email" name="email" required v-model="email">
+          <input type="email" name="email" required v-model="email" placeholder="e-mail">
         
       </div>
       <div>
         <label for="password">Password</label>
-          <input type="password" name="password" required v-model="password">        
+          <input type="password" name="password" required v-model="password" placeholder="senha">        
       </div>
       <button @click.prevent="submitForm">Acessar</button>
       <router-link :to="{ name: 'SignupForm' }">
@@ -89,6 +89,7 @@ export default {
     height: 2rem;
     width: 24rem;
     padding-left: 10px;
+    margin-top: 0.75rem;
 
     border-radius: 2px;
   }
@@ -99,7 +100,6 @@ export default {
 
     height: 2rem;
     width: 24rem;
-    padding-left: 10px;
     margin-top: 1rem;
 
     font-weight: bold;
@@ -107,7 +107,6 @@ export default {
 
   .login-form button:hover {
   cursor: pointer;
-  background-color: rgb(78, 126, 142);
   transition: background-color 0.1s;
   }
 
