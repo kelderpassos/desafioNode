@@ -3,7 +3,7 @@ const UserModel = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     lastName: DataTypes.STRING,
     age: DataTypes.INTEGER,
-    cpf: DataTypes.INTEGER,
+    cpf: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     fatherName: DataTypes.STRING,
@@ -14,7 +14,7 @@ const UserModel = (sequelize, DataTypes) => {
   });
 
   User.associate = (models) => {
-    User.hasMany(models.Address, { foreignKey: 'id', as: 'user'})
+    User.hasMany(models.Address, { foreignKey: 'id', as: 'address', onDelete: 'CASCADE'})
   }
 
   return User;

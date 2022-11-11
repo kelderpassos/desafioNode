@@ -1,4 +1,4 @@
-module.exports = (error, req, res, next) => {
+module.exports = (error, _req, res, _next) => {
   if (!error.status) {
     console.log(error);
     return res

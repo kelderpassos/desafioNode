@@ -16,21 +16,38 @@ module.exports = {
     const { id } = await User.create(infos);
     await Address.create({ ...address, userId: id });
 
-    return { id, name, lastName, age, cpf, email, fatherName, motherName };
+    return { id, name, lastName, age, cpf, email, fatherName, motherName, address };
   },
 
-  readAll: async () => User.findAll({ attributes: { exclude: 'password' } }),
+  readAll: async () => User.findAll({ include: [ { model: Address, as: 'address' } ], attributes: { exclude: 'password' } }),
 
   readOne: async (id) =>
-    User.findByPk(id, { attributes: { exclude: 'password' } }),
+    User.findByPk(id, { include: [ { model: Address, as: 'address' } ], attributes: { exclude: 'password' } }),
 
-  update: async (id, infos) => {
-    await User.update(infos, { where: { id } });
+  update: async (params, infos) => {
+    const {
+      name,
+      lastName,
+      age,
+      cpf,
+      email,
+      password,
+      fatherName,
+      motherName,
+      address,
+    } = infos;
 
-    return User.findByPk(id, { attributes: { exclude: 'password' } });
+    const { id } = await User.update(
+      { name, lastName, age, cpf, email, password, fatherName, motherName },
+      { where: { id: params } }
+    );
+
+    await Address.update({...address, userId: id}, { where: { id: params }});
+
+    return User.findByPk(params, { include: [ { model: Address, as: 'address' } ], attributes: { exclude: 'password' } });
   },
 
   delete: async (id) => User.destroy({ where: { id } }),
 
-  findByEmail: async(email) => User.findOne({ where: { email }}),
+  findByEmail: async (email) => User.findOne({ where: { email } }),
 };
