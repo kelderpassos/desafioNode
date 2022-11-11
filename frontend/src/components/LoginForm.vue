@@ -11,6 +11,7 @@
         <label for="password">Password</label>
           <input type="password" name="password" required v-model="password" placeholder="senha">        
       </div>
+      <p v-if="wrongCredentials">{{wrongCredentials}}</p>
       <button @click.prevent="submitForm">Acessar</button>
       <router-link :to="{ name: 'SignupForm' }">
           <button>Registrar</button>
@@ -21,6 +22,7 @@
 
 <script>
 import axios from 'axios';
+import baseUrl from '../utils/baseUrl';
 
 export default {
   name: 'LoginForm',
@@ -28,22 +30,19 @@ export default {
     return {
       email:'',
       password:'',
-      token: ''
+      token: '',
+      wrongCredentials: '',
     }
   },
   methods: {
     submitForm() {
-      axios.post(`http://localhost:3001/login`, { email: this.email, password: this.password })
+      axios.post(`${baseUrl}/login`, { email: this.email, password: this.password })
         .then((res) => {
           const token = JSON.stringify(res.data);
           localStorage.setItem('token', token);
-
           this.$router.push('/users');          
-        }).catch(error => console.log(error));
+        }).catch(() => this.wrongCredentials = 'E-mail ou senha incorretos');
     },
-    navigateToRegister() {
-      this.$router.push('/signup');
-    }
   }
 }
 </script>
@@ -92,6 +91,11 @@ export default {
     margin-top: 0.75rem;
 
     border-radius: 2px;
+  }
+
+  .login-form p {
+    margin: 0.5rem 0;
+    color: red;
   }
 
   .login-form button {
