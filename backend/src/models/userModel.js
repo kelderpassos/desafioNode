@@ -16,7 +16,7 @@ module.exports = {
     const { id } = await User.create(infos);
     await Address.create({ ...address, userId: id });
 
-    return { id, name, lastName, age, cpf, email, fatherName, motherName };
+    return { id, name, lastName, age, cpf, email, fatherName, motherName, address };
   },
 
   readAll: async () => User.findAll({ include: [ { model: Address, as: 'address' } ], attributes: { exclude: 'password' } }),
