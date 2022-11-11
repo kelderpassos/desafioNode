@@ -38,8 +38,8 @@
        
           <label for="">Tipo</label>
             <select required v-model="personalInfo.address.addressType">
-              <option value="casa">Casa</option>
-              <option value="apartamento">Apartamento</option>
+              <option value="Rua">Rua</option>
+              <option value="Avenida">Avenida</option>
             </select>
         
           <label for="">Bairro</label>
@@ -115,17 +115,12 @@
         this.personalInfo.address.state = uf;
       },
 
-      rerender() {
-        this.newStatus = 'Informações atualizadas';
-        console.log(this.newStatus);      
-      },
-
       async updateUser() {
         axios.put(`http://localhost:3001/users/${this.params}`, this.personalInfo)
         .then((res) => res.data)
         .then((data) => this.user = data).then((data) => {
           if (data) {
-            this.rerender()
+            this.newStatus = 'Informações atualizadas';
           }
         })
         .catch(error => console.log(error.message))
