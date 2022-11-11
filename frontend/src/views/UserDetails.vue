@@ -50,6 +50,7 @@
 import { useRoute } from 'vue-router'
 import axios from 'axios'
 import SignupFormVue from '../components/SignupForm.vue'
+import baseUrl from '../utils/baseUrl'
 
 export default {
   components: {
@@ -67,7 +68,7 @@ export default {
     }
   },
   mounted() {
-    axios(`http://localhost:3001/users/${this.$route.params.id}`)
+    axios(`${baseUrl}/users/${this.$route.params.id}`)
       .then((res) => res.data)
       .then((data) => {
         this.user = data

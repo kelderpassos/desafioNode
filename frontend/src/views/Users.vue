@@ -21,6 +21,7 @@
 
 <script>
 import axios from 'axios';
+import baseUrl from '../utils/baseUrl';
 
 export default {
   name: 'Users',
@@ -41,12 +42,12 @@ export default {
           authorization: token
         },
       }
-    axios('http://localhost:3001/users', config)
+    axios(`${baseUrl}/users`, config)
       .then((res) => this.users = res.data)
       .catch(error => console.error(error.message));
     },
     deleteUser({ target }) { 
-      axios.delete(`http://localhost:3001/users/${target.id}`)
+      axios.delete(`${baseUrl}/users/${target.id}`)
         .then(({ status }) => {
           if (status === 200) {
             this.userDeleted = 'Usuário deletado';

@@ -66,6 +66,7 @@
 
 <script>
   import axios from 'axios';
+import baseUrl from '../utils/baseUrl';
 
   export default {
     props: {
@@ -101,14 +102,14 @@
         userCreated: '',
         userUpdated: '',
         newStatus: '',
-        baseUrl: 'https://viacep.com.br/ws/'
+        viaCepURL: 'https://viacep.com.br/ws/'
       }
     },
     methods: {
       async getCep() {
-        const baseUrl = `${this.baseUrl}${this.personalInfo.address.zipCode}/json/`;
-        const response = await fetch(baseUrl);
-        const { logradouro, bairro, localidade, uf } = await response.json();
+        const URL = `${this.viaCepURL}${this.personalInfo.address.zipCode}/json/`;
+        const { data } = await axios(URL);
+        const { logradouro, bairro, localidade, uf } = data;
         this.personalInfo.address.addressName = logradouro;     
         this.personalInfo.address.neighborhood = bairro;        
         this.personalInfo.address.city = localidade;
@@ -116,7 +117,7 @@
       },
 
       async updateUser() {
-        axios.put(`http://localhost:3001/users/${this.params}`, this.personalInfo)
+        axios.put(`${baseUrl}/users/${this.params}`, this.personalInfo)
         .then((res) => res.data)
         .then((data) => this.user = data).then((data) => {
           if (data) {
@@ -134,7 +135,7 @@
           return
         }
         
-        await axios.post(`http://localhost:3001/signup`, this.personalInfo)
+        await axios.post(`${baseUrl}/signup`, this.personalInfo)
           .then(({ status }) => {
             if (status === 201) this.newStatus = 'Usuário criado';
           });
