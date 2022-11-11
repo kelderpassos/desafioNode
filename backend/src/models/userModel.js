@@ -19,10 +19,10 @@ module.exports = {
     return { id, name, lastName, age, cpf, email, fatherName, motherName };
   },
 
-  readAll: async () => User.findAll({ attributes: { exclude: 'password' } }),
+  readAll: async () => User.findAll({ include: [ { model: Address, as: 'address' } ], attributes: { exclude: 'password' } }),
 
   readOne: async (id) =>
-    User.findByPk(id, { attributes: { exclude: 'password' } }),
+    User.findByPk(id, { include: [ { model: Address, as: 'address' } ], attributes: { exclude: 'password' } }),
 
   update: async (params, infos) => {
     const {
@@ -44,7 +44,7 @@ module.exports = {
 
     await Address.update({...address, userId: id}, { where: { id: params }});
 
-    return User.findByPk(params, { attributes: { exclude: 'password' } });
+    return User.findByPk(params, { include: [ { model: Address, as: 'address' } ], attributes: { exclude: 'password' } });
   },
 
   delete: async (id) => User.destroy({ where: { id } }),
